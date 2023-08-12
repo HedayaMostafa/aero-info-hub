@@ -30,5 +30,4 @@ public class Flight {
 
     @Column(name = "departureDate")
     private LocalDateTime departureDate;
-
 }

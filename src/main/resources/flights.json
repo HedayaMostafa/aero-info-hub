@@ -1,0 +1,37 @@
+[
+  {
+    "flightId": 0,
+    "flightNumber": 5105,
+    "departureAirportIATACode": "SEA",
+    "arrivalAirportIATACode": "PPX",
+    "departureDate": "2021-01-19T08:38:48-01:00"
+  },
+  {
+    "flightId": 1,
+    "flightNumber": 7189,
+    "departureAirportIATACode": "LAX",
+    "arrivalAirportIATACode": "KRK",
+    "departureDate": "2014-09-09T11:13:55-02:00"
+  },
+  {
+    "flightId": 2,
+    "flightNumber": 9340,
+    "departureAirportIATACode": "LAX",
+    "arrivalAirportIATACode": "PPX",
+    "departureDate": "2019-02-04T11:50:49-01:00"
+  },
+  {
+    "flightId": 3,
+    "flightNumber": 2330,
+    "departureAirportIATACode": "YYZ",
+    "arrivalAirportIATACode": "LEW",
+    "departureDate": "2019-11-28T10:52:05-01:00"
+  },
+  {
+    "flightId": 4,
+    "flightNumber": 5201,
+    "departureAirportIATACode": "ANC",
+    "arrivalAirportIATACode": "MIT",
+    "departureDate": "2014-01-20T04:51:25-01:00"
+  }
+]

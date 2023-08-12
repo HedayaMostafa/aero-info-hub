@@ -8,9 +8,7 @@ import com.smart4aviation.flightInformation.model.Flight;
 import com.smart4aviation.flightInformation.repository.FlightRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -22,7 +20,7 @@ public class FlightService implements CommandLineRunner {
     private final FlightRepository flightRepository;
     private final FlightMapper flightMapper;
 
-    private final String FLIGHTS_JSON = "/flights.json";
+    private final String FLIGHTS_JSON = "/flight.json";
 
     @Autowired
     public FlightService(FlightRepository flightRepository, FlightMapper flightMapper) {

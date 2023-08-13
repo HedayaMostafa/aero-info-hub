@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(name = "initial_value", sequenceName = "my_sequence", initialValue = 0)
 @Table(name = "flight")
 public class Flight {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "initial_value")
     @Column(name = "flightId", nullable = false)
     private Long flightId;
 

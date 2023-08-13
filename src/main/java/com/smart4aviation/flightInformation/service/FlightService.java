@@ -9,11 +9,13 @@ import com.smart4aviation.flightInformation.repository.FlightRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.util.List;
 
+@Order(value=1)
 @Slf4j
 @Component
 public class FlightService implements CommandLineRunner {
@@ -35,6 +37,6 @@ public class FlightService implements CommandLineRunner {
         List<FlightDTO> flightDTOS =  new ObjectMapper().readValue(inputStream, typeReference);
         List<Flight> flights = flightMapper.flightDTOListToFlightList(flightDTOS);
         flightRepository.saveAll(flights);
-        log.info("The flights have been saved.");
+        log.info("The flights have been added.");
    }
 }

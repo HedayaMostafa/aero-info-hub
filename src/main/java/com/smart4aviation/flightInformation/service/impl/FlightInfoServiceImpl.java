@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @Log4j2
@@ -36,45 +37,48 @@ public class FlightInfoServiceImpl implements FlightInfoService {
 
     @Override
     public FlightInfoWeightResponseDTO getFlightInfoWeight(FlightInfoWeightRequestDTO requestDTO) {
-        double baggageWeight = 0, cargoWeight = 0, totalWeight = 0;
+        AtomicReference<Double> baggageWeight = new AtomicReference<>((double) 0);
+        AtomicReference<Double> cargoWeight = new AtomicReference<>((double) 0);
+        double totalWeight = 0;
 
         String date = String.valueOf(OffsetDateTime.parse(requestDTO.getDate().toString()));
 
         Optional<Flight> flight = flightRepository.findByFlightNumberAndDepartureDate(requestDTO.getFlightNumber(), date);
 
         if (flight.isPresent()) {
-            Optional<List<Baggage>> baggageList = baggageRepository.findByFlight(flight.get());
-            Optional<List<Cargo>> cargoList = cargoRepository.findByFlight(flight.get());
+            Optional<List<Baggage>> optionalBaggageList = baggageRepository.findByFlight(flight.get());
+            Optional<List<Cargo>> optionalCargoList = cargoRepository.findByFlight(flight.get());
 
-            if (baggageList.isPresent()) {
-                baggageWeight = baggageList.get()
+            optionalBaggageList.ifPresentOrElse(baggageList -> {
+                baggageWeight.set(baggageList
                         .stream()
                         .mapToDouble(Baggage::getWeight)
-                        .sum();
+                        .sum());
 
-            } else {
+            }, () -> {
                 log.info("No baggage data found.");
-            }
+            });
 
-            if (cargoList.isPresent()) {
-                cargoWeight = cargoList.get()
+
+            optionalCargoList.ifPresentOrElse(cargoList -> {
+                cargoWeight.set(cargoList
                         .stream()
                         .mapToDouble(Cargo::getWeight)
-                        .sum();
+                        .sum());
 
-            } else {
+            }, () -> {
                 log.info("No cargo data found.");
-            }
+            });
 
-            totalWeight = baggageWeight + cargoWeight;
+            totalWeight = baggageWeight.get() + cargoWeight.get();
         } else {
             log.error("No flight found.");
             throw new FlightNotFoundException("We cannot find your flight at this time.");
         }
 
         FlightInfoWeightResponseDTO infoWeightResponseDTO = new FlightInfoWeightResponseDTO();
-        infoWeightResponseDTO.setBaggageWeight(baggageWeight);
-        infoWeightResponseDTO.setCargoWeight(cargoWeight);
+        infoWeightResponseDTO.setBaggageWeight(baggageWeight.get());
+        infoWeightResponseDTO.setCargoWeight(cargoWeight.get());
         infoWeightResponseDTO.setTotalWeight(totalWeight);
 
         return infoWeightResponseDTO;

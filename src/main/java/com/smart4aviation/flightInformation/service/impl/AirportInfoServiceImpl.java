@@ -2,6 +2,7 @@ package com.smart4aviation.flightInformation.service.impl;
 
 import com.smart4aviation.flightInformation.dto.AirportInfoRequestDTO;
 import com.smart4aviation.flightInformation.dto.AirportInfoResponseDTO;
+import com.smart4aviation.flightInformation.exception.FlightNotFoundException;
 import com.smart4aviation.flightInformation.model.Baggage;
 import com.smart4aviation.flightInformation.model.Flight;
 import com.smart4aviation.flightInformation.repository.BaggageRepository;
@@ -38,6 +39,11 @@ public class AirportInfoServiceImpl implements AirportInfoService {
 
        flightsDeparting= flightRepository.countByDepartureAirportIATACodeAndDepartureDate(requestDTO.getCode(), String.valueOf(requestDTO.getDate()));
        flightsArriving= flightRepository.countByArrivalAirportIATACodeAndDepartureDate(requestDTO.getCode(), String.valueOf(requestDTO.getDate()));
+
+       if(flightsDeparting == 0 && flightsArriving ==0) {
+           log.error("No flight found.");
+           throw new FlightNotFoundException("No flights found");
+       }
 
         Optional<List<Flight>> optionalDepartureFlights = flightRepository.findAllByDepartureAirportIATACodeAndDepartureDate(requestDTO.getCode(), String.valueOf(requestDTO.getDate()));
         Optional<List<Flight>> optionalArrivalFlights = flightRepository.findAllByArrivalAirportIATACodeAndDepartureDate(requestDTO.getCode(), String.valueOf(requestDTO.getDate()));

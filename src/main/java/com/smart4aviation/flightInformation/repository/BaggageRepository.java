@@ -11,4 +11,7 @@ import java.util.Optional;
 @Repository
 public interface BaggageRepository extends JpaRepository<Baggage, Long> {
     Optional<List<Baggage>> findByFlight(Flight flight);
+
+    Optional<List<Baggage>> findAllByFlightIn(List<Flight> flightList);
+
 }

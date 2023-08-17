@@ -13,10 +13,10 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 public class AirportInfoRequestDTO {
 
-    @NotNull
+    @NotNull( message = "Code must not be null")
     private String code;
 
-    @NotNull
+    @NotNull( message = "Date must not be null")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime date;
 }

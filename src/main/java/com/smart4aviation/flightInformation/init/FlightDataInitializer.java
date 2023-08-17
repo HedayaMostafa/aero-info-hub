@@ -1,4 +1,4 @@
-package com.smart4aviation.flightInformation.service;
+package com.smart4aviation.flightInformation.init;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,14 +18,14 @@ import java.util.List;
 @Order(value=1)
 @Slf4j
 @Component
-public class FlightService implements CommandLineRunner {
+public class FlightDataInitializer implements CommandLineRunner {
     private final FlightRepository flightRepository;
     private final FlightMapper flightMapper;
 
     private final String FLIGHTS_JSON = "/flight.json";
 
     @Autowired
-    public FlightService(FlightRepository flightRepository, FlightMapper flightMapper) {
+    public FlightDataInitializer(FlightRepository flightRepository, FlightMapper flightMapper) {
         this.flightRepository = flightRepository;
         this.flightMapper = flightMapper;
     }

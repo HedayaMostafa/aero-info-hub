@@ -1,4 +1,4 @@
-package com.smart4aviation.flightInformation.service;
+package com.smart4aviation.flightInformation.init;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @Order(value=2)
 @Slf4j
 @Component
-public class CargoService  implements CommandLineRunner {
+public class CargoDataInitializer implements CommandLineRunner {
 
     private final String CARGO_JSON = "/cargo.json";
 
@@ -33,7 +33,7 @@ public class CargoService  implements CommandLineRunner {
     private final FlightRepository flightRepository;
 
     @Autowired
-    public CargoService(BaggageRepository baggageRepository, CargoRepository cargoRepository, FlightRepository flightRepository) {
+    public CargoDataInitializer(BaggageRepository baggageRepository, CargoRepository cargoRepository, FlightRepository flightRepository) {
         this.baggageRepository = baggageRepository;
         this.cargoRepository = cargoRepository;
         this.flightRepository = flightRepository;

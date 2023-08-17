@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -30,5 +28,5 @@ public class Flight {
     private String arrivalAirportIATACode;
 
     @Column(name = "departureDate")
-    private LocalDateTime departureDate;
+    private String departureDate;
 }

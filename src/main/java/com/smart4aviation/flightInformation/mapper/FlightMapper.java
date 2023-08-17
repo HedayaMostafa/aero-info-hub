@@ -17,9 +17,7 @@ public class FlightMapper {
         flight.setFlightNumber(flightDTO.getFlightNumber());
         flight.setDepartureAirportIATACode(flightDTO.getDepartureAirportIATACode());
         flight.setArrivalAirportIATACode(flightDTO.getArrivalAirportIATACode());
-        if(flightDTO.getDepartureDate()!=null) {
-            flight.setDepartureDate(DateTimeUtils.parseLocalDateTime(flightDTO.getDepartureDate()));
-        }
+        flight.setDepartureDate(flightDTO.getDepartureDate());
         return flight;
     }
 

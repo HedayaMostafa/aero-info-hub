@@ -18,7 +18,7 @@ public class Cargo {
     private Long id;
 
     @Column(name = "weight")
-    private Integer weight;
+    private double weight;
 
     @Column(name = "weightUnit")
     private String weightUnit;

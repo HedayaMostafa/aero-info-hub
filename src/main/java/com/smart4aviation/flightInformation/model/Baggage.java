@@ -19,7 +19,7 @@ public class Baggage {
     private Long id;
 
     @Column(name = "weight")
-    private Integer weight;
+    private double weight;
 
     @Column(name = "weightUnit")
     private String weightUnit;
@@ -30,5 +30,4 @@ public class Baggage {
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
-
 }

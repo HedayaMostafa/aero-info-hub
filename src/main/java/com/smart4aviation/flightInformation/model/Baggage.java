@@ -1,15 +1,18 @@
 package com.smart4aviation.flightInformation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
 
 @Entity
-@Data
+//@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @SequenceGenerator(name = "initial_value", sequenceName = "my_sequence", initialValue = 0)
 @Table(name = "baggage")
 public class Baggage {
@@ -30,4 +33,17 @@ public class Baggage {
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Baggage baggage = (Baggage) o;
+        return getId() != null && Objects.equals(getId(), baggage.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
